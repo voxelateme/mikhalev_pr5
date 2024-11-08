@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f0e48e1f6ff467d83833a9eec16b8d8" Name="Diagram1">
+        <EntityTypeShape EntityType="telecommunicationModel.AuthInfo" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.ClientEquipment" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.Clients" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.ClientServices" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.Employee" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.Equipment" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.EquipmentExpenses" Width="1.5" PointX="5.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.MonthlyCharges" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.PasswordRecovery" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.RegistrationConfirmation" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.Requests" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.Role" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.Services" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.Status" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="telecommunicationModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="telecommunicationModel.FK_Clients_AuthInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK_Employee_AuthInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__ClientEqu__Clien__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__ClientEqu__Equip__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__ClientSer__Clien__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__MonthlyCh__Clien__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__PasswordR__Clien__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__Registrat__Clien__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__Requests__Client__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__ClientSer__Servi__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK_Employee_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK_Requests_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__Equipment__Equip__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK__Requests__Servic__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="telecommunicationModel.FK_Requests_Status" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

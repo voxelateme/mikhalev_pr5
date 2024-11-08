@@ -1,0 +1,1018 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище telecommunicationModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuthInfo">
+          <Key>
+            <PropertyRef Name="AuthInfoID" />
+          </Key>
+          <Property Name="AuthInfoID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientEquipment">
+          <Key>
+            <PropertyRef Name="ClientEquipmentID" />
+          </Key>
+          <Property Name="ClientEquipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="EquipmentID" Type="int" Nullable="false" />
+          <Property Name="AssignmentDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="AuthInfoID" Type="bigint" Nullable="false" />
+          <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+          <Property Name="Balance" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientServices">
+          <Key>
+            <PropertyRef Name="ClientServiceID" />
+          </Key>
+          <Property Name="ClientServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="ServiceID" Type="bigint" Nullable="false" />
+          <Property Name="ConnectionDate" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="bigint" Nullable="false" />
+          <Property Name="AuthInfoID" Type="bigint" Nullable="false" />
+          <Property Name="RoleID" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EquipmentDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsAvailable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentExpenses">
+          <Key>
+            <PropertyRef Name="ExpenseID" />
+          </Key>
+          <Property Name="ExpenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentID" Type="int" Nullable="false" />
+          <Property Name="ExpenseDate" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MonthlyCharges">
+          <Key>
+            <PropertyRef Name="ChargeID" />
+          </Key>
+          <Property Name="ChargeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="ChargeMonth" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PasswordRecovery">
+          <Key>
+            <PropertyRef Name="RecoveryID" />
+          </Key>
+          <Property Name="RecoveryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="RecoveryCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationConfirmation">
+          <Key>
+            <PropertyRef Name="ConfirmationID" />
+          </Key>
+          <Property Name="ConfirmationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="ConfirmationCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="ServiceID" Type="bigint" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusID" Type="bigint" Nullable="false" />
+          <Property Name="EmployeeID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="bigint" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ServiceDescription" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="bigint" Nullable="false" />
+          <Property Name="StatusName" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__ClientEqu__Clien__4BAC3F29">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientEquipment" Type="Self.ClientEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClientEquipment">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientEqu__Equip__4CA06362">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="ClientEquipment" Type="Self.ClientEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="EquipmentID" />
+            </Principal>
+            <Dependent Role="ClientEquipment">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientSer__Clien__3E52440B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientServices" Type="Self.ClientServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClientServices">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientSer__Servi__3F466844">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="ClientServices" Type="Self.ClientServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="ClientServices">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Equip__534D60F1">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentExpenses" Type="Self.EquipmentExpenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="EquipmentID" />
+            </Principal>
+            <Dependent Role="EquipmentExpenses">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonthlyCh__Clien__5070F446">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="MonthlyCharges" Type="Self.MonthlyCharges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="MonthlyCharges">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PasswordR__Clien__59063A47">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="PasswordRecovery" Type="Self.PasswordRecovery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="PasswordRecovery">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Registrat__Clien__5629CD9C">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="RegistrationConfirmation" Type="Self.RegistrationConfirmation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="RegistrationConfirmation">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Client__4316F928">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Servic__440B1D61">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_AuthInfo">
+          <End Role="AuthInfo" Type="Self.AuthInfo" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthInfo">
+              <PropertyRef Name="AuthInfoID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="AuthInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_AuthInfo">
+          <End Role="AuthInfo" Type="Self.AuthInfo" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthInfo">
+              <PropertyRef Name="AuthInfoID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="AuthInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище telecommunicationModelContainer">
+          <EntitySet Name="AuthInfo" EntityType="Self.AuthInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientEquipment" EntityType="Self.ClientEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientServices" EntityType="Self.ClientServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentExpenses" EntityType="Self.EquipmentExpenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyCharges" EntityType="Self.MonthlyCharges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PasswordRecovery" EntityType="Self.PasswordRecovery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationConfirmation" EntityType="Self.RegistrationConfirmation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClientEqu__Clien__4BAC3F29" Association="Self.FK__ClientEqu__Clien__4BAC3F29">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientEquipment" EntitySet="ClientEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientEqu__Equip__4CA06362" Association="Self.FK__ClientEqu__Equip__4CA06362">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="ClientEquipment" EntitySet="ClientEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientSer__Clien__3E52440B" Association="Self.FK__ClientSer__Clien__3E52440B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientServices" EntitySet="ClientServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientSer__Servi__3F466844" Association="Self.FK__ClientSer__Servi__3F466844">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ClientServices" EntitySet="ClientServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Equip__534D60F1" Association="Self.FK__Equipment__Equip__534D60F1">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentExpenses" EntitySet="EquipmentExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonthlyCh__Clien__5070F446" Association="Self.FK__MonthlyCh__Clien__5070F446">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="MonthlyCharges" EntitySet="MonthlyCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PasswordR__Clien__59063A47" Association="Self.FK__PasswordR__Clien__59063A47">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="PasswordRecovery" EntitySet="PasswordRecovery" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Registrat__Clien__5629CD9C" Association="Self.FK__Registrat__Clien__5629CD9C">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="RegistrationConfirmation" EntitySet="RegistrationConfirmation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Client__4316F928" Association="Self.FK__Requests__Client__4316F928">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Servic__440B1D61" Association="Self.FK__Requests__Servic__440B1D61">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_AuthInfo" Association="Self.FK_Clients_AuthInfo">
+            <End Role="AuthInfo" EntitySet="AuthInfo" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_AuthInfo" Association="Self.FK_Employee_AuthInfo">
+            <End Role="AuthInfo" EntitySet="AuthInfo" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Employee" Association="Self.FK_Requests_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Status" Association="Self.FK_Requests_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="telecommunicationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AuthInfo">
+          <Key>
+            <PropertyRef Name="AuthInfoID" />
+          </Key>
+          <Property Name="AuthInfoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_AuthInfo" FromRole="AuthInfo" ToRole="Clients" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_AuthInfo" FromRole="AuthInfo" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="ClientEquipment">
+          <Key>
+            <PropertyRef Name="ClientEquipmentID" />
+          </Key>
+          <Property Name="ClientEquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="EquipmentID" Type="Int32" Nullable="false" />
+          <Property Name="AssignmentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__ClientEqu__Clien__4BAC3F29" FromRole="ClientEquipment" ToRole="Clients" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__ClientEqu__Equip__4CA06362" FromRole="ClientEquipment" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuthInfoID" Type="Int64" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="AuthInfo" Relationship="Self.FK_Clients_AuthInfo" FromRole="Clients" ToRole="AuthInfo" />
+          <NavigationProperty Name="ClientEquipment" Relationship="Self.FK__ClientEqu__Clien__4BAC3F29" FromRole="Clients" ToRole="ClientEquipment" />
+          <NavigationProperty Name="ClientServices" Relationship="Self.FK__ClientSer__Clien__3E52440B" FromRole="Clients" ToRole="ClientServices" />
+          <NavigationProperty Name="MonthlyCharges" Relationship="Self.FK__MonthlyCh__Clien__5070F446" FromRole="Clients" ToRole="MonthlyCharges" />
+          <NavigationProperty Name="PasswordRecovery" Relationship="Self.FK__PasswordR__Clien__59063A47" FromRole="Clients" ToRole="PasswordRecovery" />
+          <NavigationProperty Name="RegistrationConfirmation" Relationship="Self.FK__Registrat__Clien__5629CD9C" FromRole="Clients" ToRole="RegistrationConfirmation" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Client__4316F928" FromRole="Clients" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="ClientServices">
+          <Key>
+            <PropertyRef Name="ClientServiceID" />
+          </Key>
+          <Property Name="ClientServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="ServiceID" Type="Int64" Nullable="false" />
+          <Property Name="ConnectionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__ClientSer__Clien__3E52440B" FromRole="ClientServices" ToRole="Clients" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__ClientSer__Servi__3F466844" FromRole="ClientServices" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int64" Nullable="false" />
+          <Property Name="AuthInfoID" Type="Int64" Nullable="false" />
+          <Property Name="RoleID" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AuthInfo" Relationship="Self.FK_Employee_AuthInfo" FromRole="Employee" ToRole="AuthInfo" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Employee" FromRole="Employee" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EquipmentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClientEquipment" Relationship="Self.FK__ClientEqu__Equip__4CA06362" FromRole="Equipment" ToRole="ClientEquipment" />
+          <NavigationProperty Name="EquipmentExpenses" Relationship="Self.FK__Equipment__Equip__534D60F1" FromRole="Equipment" ToRole="EquipmentExpenses" />
+        </EntityType>
+        <EntityType Name="EquipmentExpenses">
+          <Key>
+            <PropertyRef Name="ExpenseID" />
+          </Key>
+          <Property Name="ExpenseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentID" Type="Int32" Nullable="false" />
+          <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__Equip__534D60F1" FromRole="EquipmentExpenses" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="MonthlyCharges">
+          <Key>
+            <PropertyRef Name="ChargeID" />
+          </Key>
+          <Property Name="ChargeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="ChargeMonth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__MonthlyCh__Clien__5070F446" FromRole="MonthlyCharges" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="PasswordRecovery">
+          <Key>
+            <PropertyRef Name="RecoveryID" />
+          </Key>
+          <Property Name="RecoveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="RecoveryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__PasswordR__Clien__59063A47" FromRole="PasswordRecovery" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="RegistrationConfirmation">
+          <Key>
+            <PropertyRef Name="ConfirmationID" />
+          </Key>
+          <Property Name="ConfirmationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="ConfirmationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Registrat__Clien__5629CD9C" FromRole="RegistrationConfirmation" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="ServiceID" Type="Int64" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusID" Type="Int64" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Requests__Client__4316F928" FromRole="Requests" ToRole="Clients" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Requests_Employee" FromRole="Requests" ToRole="Employee" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__Requests__Servic__440B1D61" FromRole="Requests" ToRole="Services" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Requests_Status" FromRole="Requests" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int64" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ClientServices" Relationship="Self.FK__ClientSer__Servi__3F466844" FromRole="Services" ToRole="ClientServices" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Servic__440B1D61" FromRole="Services" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int64" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Status" FromRole="Status" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Clients_AuthInfo">
+          <End Role="AuthInfo" Type="Self.AuthInfo" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthInfo">
+              <PropertyRef Name="AuthInfoID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="AuthInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_AuthInfo">
+          <End Role="AuthInfo" Type="Self.AuthInfo" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthInfo">
+              <PropertyRef Name="AuthInfoID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="AuthInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientEqu__Clien__4BAC3F29">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientEquipment" Type="Self.ClientEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClientEquipment">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientEqu__Equip__4CA06362">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="ClientEquipment" Type="Self.ClientEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="EquipmentID" />
+            </Principal>
+            <Dependent Role="ClientEquipment">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientSer__Clien__3E52440B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientServices" Type="Self.ClientServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClientServices">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonthlyCh__Clien__5070F446">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="MonthlyCharges" Type="Self.MonthlyCharges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="MonthlyCharges">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PasswordR__Clien__59063A47">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="PasswordRecovery" Type="Self.PasswordRecovery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="PasswordRecovery">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Registrat__Clien__5629CD9C">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="RegistrationConfirmation" Type="Self.RegistrationConfirmation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="RegistrationConfirmation">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Client__4316F928">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientSer__Servi__3F466844">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="ClientServices" Type="Self.ClientServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="ClientServices">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Equip__534D60F1">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentExpenses" Type="Self.EquipmentExpenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="EquipmentID" />
+            </Principal>
+            <Dependent Role="EquipmentExpenses">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Servic__440B1D61">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="telecommunicationEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AuthInfo" EntityType="Self.AuthInfo" />
+          <EntitySet Name="ClientEquipment" EntityType="Self.ClientEquipment" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="ClientServices" EntityType="Self.ClientServices" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentExpenses" EntityType="Self.EquipmentExpenses" />
+          <EntitySet Name="MonthlyCharges" EntityType="Self.MonthlyCharges" />
+          <EntitySet Name="PasswordRecovery" EntityType="Self.PasswordRecovery" />
+          <EntitySet Name="RegistrationConfirmation" EntityType="Self.RegistrationConfirmation" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Clients_AuthInfo" Association="Self.FK_Clients_AuthInfo">
+            <End Role="AuthInfo" EntitySet="AuthInfo" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_AuthInfo" Association="Self.FK_Employee_AuthInfo">
+            <End Role="AuthInfo" EntitySet="AuthInfo" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientEqu__Clien__4BAC3F29" Association="Self.FK__ClientEqu__Clien__4BAC3F29">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientEquipment" EntitySet="ClientEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientEqu__Equip__4CA06362" Association="Self.FK__ClientEqu__Equip__4CA06362">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="ClientEquipment" EntitySet="ClientEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientSer__Clien__3E52440B" Association="Self.FK__ClientSer__Clien__3E52440B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientServices" EntitySet="ClientServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonthlyCh__Clien__5070F446" Association="Self.FK__MonthlyCh__Clien__5070F446">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="MonthlyCharges" EntitySet="MonthlyCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PasswordR__Clien__59063A47" Association="Self.FK__PasswordR__Clien__59063A47">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="PasswordRecovery" EntitySet="PasswordRecovery" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Registrat__Clien__5629CD9C" Association="Self.FK__Registrat__Clien__5629CD9C">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="RegistrationConfirmation" EntitySet="RegistrationConfirmation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Client__4316F928" Association="Self.FK__Requests__Client__4316F928">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientSer__Servi__3F466844" Association="Self.FK__ClientSer__Servi__3F466844">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ClientServices" EntitySet="ClientServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Employee" Association="Self.FK_Requests_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Equip__534D60F1" Association="Self.FK__Equipment__Equip__534D60F1">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentExpenses" EntitySet="EquipmentExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Servic__440B1D61" Association="Self.FK__Requests__Servic__440B1D61">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Status" Association="Self.FK_Requests_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище telecommunicationModelContainer" CdmEntityContainer="telecommunicationEntities1">
+          <EntitySetMapping Name="AuthInfo">
+            <EntityTypeMapping TypeName="telecommunicationModel.AuthInfo">
+              <MappingFragment StoreEntitySet="AuthInfo">
+                <ScalarProperty Name="AuthInfoID" ColumnName="AuthInfoID" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientEquipment">
+            <EntityTypeMapping TypeName="telecommunicationModel.ClientEquipment">
+              <MappingFragment StoreEntitySet="ClientEquipment">
+                <ScalarProperty Name="ClientEquipmentID" ColumnName="ClientEquipmentID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="AssignmentDate" ColumnName="AssignmentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="telecommunicationModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AuthInfoID" ColumnName="AuthInfoID" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientServices">
+            <EntityTypeMapping TypeName="telecommunicationModel.ClientServices">
+              <MappingFragment StoreEntitySet="ClientServices">
+                <ScalarProperty Name="ClientServiceID" ColumnName="ClientServiceID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ConnectionDate" ColumnName="ConnectionDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="telecommunicationModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="AuthInfoID" ColumnName="AuthInfoID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="telecommunicationModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
+                <ScalarProperty Name="EquipmentDescription" ColumnName="EquipmentDescription" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentExpenses">
+            <EntityTypeMapping TypeName="telecommunicationModel.EquipmentExpenses">
+              <MappingFragment StoreEntitySet="EquipmentExpenses">
+                <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthlyCharges">
+            <EntityTypeMapping TypeName="telecommunicationModel.MonthlyCharges">
+              <MappingFragment StoreEntitySet="MonthlyCharges">
+                <ScalarProperty Name="ChargeID" ColumnName="ChargeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ChargeMonth" ColumnName="ChargeMonth" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PasswordRecovery">
+            <EntityTypeMapping TypeName="telecommunicationModel.PasswordRecovery">
+              <MappingFragment StoreEntitySet="PasswordRecovery">
+                <ScalarProperty Name="RecoveryID" ColumnName="RecoveryID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="RecoveryCode" ColumnName="RecoveryCode" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationConfirmation">
+            <EntityTypeMapping TypeName="telecommunicationModel.RegistrationConfirmation">
+              <MappingFragment StoreEntitySet="RegistrationConfirmation">
+                <ScalarProperty Name="ConfirmationID" ColumnName="ConfirmationID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ConfirmationCode" ColumnName="ConfirmationCode" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="telecommunicationModel.Requests">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="telecommunicationModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="telecommunicationModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="telecommunicationModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="telecommunicationModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
